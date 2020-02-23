@@ -1,5 +1,10 @@
 pipeline {
     agent any
+	parameters {
+		string(name: 'prod_ip',
+			defaultValue: '127.0.0.1',
+			description: 'ip address of host server to deploy container to')
+	}
     stages {
         stage('Build') {
             steps {
