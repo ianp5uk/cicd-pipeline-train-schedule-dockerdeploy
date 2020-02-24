@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				script {
 					app.inside{
-						sh 'echo $(curl localhost:8082)'
+						sh 'echo $(curl localhost:3000)'
 						}
 					}
 			}
