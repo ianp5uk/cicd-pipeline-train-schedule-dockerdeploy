@@ -20,9 +20,6 @@ pipeline {
             steps {
                 script {
                     app = docker.build("ianp5uk/train-schedule")
-					app.inside {
-						sh 'echo $(curl localhost:8082)'
-						}
                 }
             }
         }
@@ -39,12 +36,12 @@ pipeline {
                 }
             }
         }
-        stage('DeployToProduction') {
+        stage('Deploy To Prod') {
             when {
                 branch 'master'
             }
             steps {
-                input 'Deploy to Production?'
+                input 'Deploy to Prod?'
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
@@ -60,5 +57,20 @@ pipeline {
                 }
             }
         }
+		stage('Check Running') {
+			when {
+				branch 'master'
+			}
+			steps {
+				script {
+					try {
+						sh "curl localhost:8082"
+					} catch (err) {
+						echo 'Caught Error: $err'
+					}
+				}
+			}
+		}
+	
     }
 }
