@@ -20,9 +20,6 @@ pipeline {
             steps {
                 script {
                     app = docker.build("ianp5uk/train-schedule")
-                    app.inside {
-                        sh 'echo $(curl localhost:8082)'
-                    }
                 }
             }
         }
@@ -60,5 +57,10 @@ pipeline {
                 }
             }
         }
+		stage('Test_image') {
+			app.inside{
+				sh 'echo $(curl localhost:8082)'
+			}
+		}
     }
 }
