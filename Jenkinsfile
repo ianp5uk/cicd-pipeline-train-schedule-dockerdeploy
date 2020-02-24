@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				script {
 						sh "sleep 10"
-						sh "curl 0.0.0.0:8082"
+						sh "echo $(curl --head 0.0.0.0:8082)"
 					}
 				}
 			}
