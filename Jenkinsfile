@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-		stage('Check Running') {
+		stage('Smoke Test') {
 			steps {
 				script {
 						sh "sleep 10"
