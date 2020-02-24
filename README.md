@@ -16,3 +16,6 @@ Once it is running, you can access it in a browser at [http://localhost:3000](ht
 This repo & Jenkinsfile was built using Jenkins 2.204.2 & deploys to docker-ce v19.03.6.
 The '-ce' is important, as is installing with apt. Using the older Ubuntu snap version generated
 unexpected errors in Jenkins.
+To run with Jenkins it will require credentials setting up to access the webserver, dockerhub & github.
+The webserver address is set as a Jenkins parameter.
+
