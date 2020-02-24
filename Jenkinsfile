@@ -58,9 +58,6 @@ pipeline {
             }
         }
 		stage('Check Running') {
-			when {
-				branch 'master'
-			}
 			steps {
 				script {
 					try {
