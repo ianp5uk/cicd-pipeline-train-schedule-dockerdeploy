@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				script {
 					try {
-						sh "curl localhost:8082"
+						sh "curl 0.0.0.0:8082"
 					} catch (err) {
 						echo 'Caught Error: $err'
 					}
