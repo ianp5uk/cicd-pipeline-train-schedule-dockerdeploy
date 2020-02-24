@@ -60,7 +60,8 @@ pipeline {
 		stage('Check Running') {
 			steps {
 				script {
-						sh "sleep 10 \"curl 0.0.0.0:8082\""
+						sh "sleep 10"
+						sh "curl 0.0.0.0:8082"
 					}
 				}
 			}
