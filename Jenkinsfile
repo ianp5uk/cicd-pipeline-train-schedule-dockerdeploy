@@ -60,10 +60,7 @@ pipeline {
 		stage('Check Running') {
 			steps {
 				script {
-					try {
-						sh "curl 0.0.0.0:8082"
-					} catch (err) {
-						echo 'Caught Error: $err'
+						sh "sleep 10 \"curl 0.0.0.0:8082\""
 					}
 				}
 			}
