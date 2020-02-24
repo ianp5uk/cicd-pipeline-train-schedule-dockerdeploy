@@ -58,8 +58,12 @@ pipeline {
             }
         }
 		stage('Test_image') {
-			app.inside{
-				sh 'echo $(curl localhost:8082)'
+			steps {
+				script {
+					app.inside{
+						sh 'echo $(curl localhost:8082)'
+						}
+					}
 			}
 		}
     }
