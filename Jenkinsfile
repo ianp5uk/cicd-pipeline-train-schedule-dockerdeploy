@@ -43,16 +43,16 @@ pipeline {
             steps {
                 input 'Deploy to Prod?'
                 milestone(1)
-                withCredentials([usernamePassword(credentialsId: 'ec2_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'swarm_login', usernameVariable: 'USERNAME', keyFileVariable: 'KEYFILEPATH')]) {
                     script {
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -v ssh -i $KEYFILEPATH -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
                         try {
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop train-schedule\""
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm train-schedule\""
+                            sh "sshpass -v ssh -i $KEYFILEPATH -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop train-schedule\""
+                            sh "sshpass -v ssh -i $KEYFILEPATH -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm train-schedule\""
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 80:3000 -d ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -v ssh -i $KEYFILEPATH -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 80:3000 -d ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
                     }
                 }
             }
