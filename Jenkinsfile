@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				script {
 						sh "sleep 10"
-						sh "curl -s -o /dev/null -D - 0.0.0.0:80"
+						sh "curl -s -o /dev/null -D - $prod_ip:80"
 					}
 				}
 			}
