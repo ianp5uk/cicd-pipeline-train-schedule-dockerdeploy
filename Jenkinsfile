@@ -52,7 +52,7 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8082:3000 -d ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 80:3000 -d ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
                     }
                 }
             }
@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				script {
 						sh "sleep 10"
-						sh "curl -s -o /dev/null -D - 0.0.0.0:8082"
+						sh "curl -s -o /dev/null -D - 0.0.0.0:80"
 					}
 				}
 			}
