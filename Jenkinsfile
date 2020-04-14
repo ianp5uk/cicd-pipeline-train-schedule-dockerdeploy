@@ -43,7 +43,7 @@ pipeline {
             steps {
                 input 'Deploy to Prod?'
                 milestone(1)
-                withCredentials([usernamePassword(credentialsId: 'swarm_login', usernameVariable: 'USERNAME', keyFileVariable: 'KEYFILEPATH')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'swarm_login', keyFileVariable: '~/.ssh', passphraseVariable: '', usernameVariable: 'ec2-user')]) {
                     script {
                         sh "sshpass -v ssh -i $KEYFILEPATH -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
                         try {
