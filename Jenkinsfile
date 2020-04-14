@@ -45,10 +45,9 @@ pipeline {
                 milestone(1)
                 withCredentials([sshUserPrivateKey(credentialsId: 'swarm_login', keyFileVariable: 'KEYFILE', passphraseVariable: '', usernameVariable: 'USERNAME')]) {
                     script {
-                        sh "sshpass -v ssh -i $KEYFILE -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -v ssh -i $KEYFILE -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker service create --name train-schedule --replicas 3 --publish=3000,target=80 ianp5uk/train-schedule:${env.BUILD_NUMBER}\""
                         try {
-                            sh "sshpass -v ssh -i $KEYFILE -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop train-schedule\""
-                            sh "sshpass -v ssh -i $KEYFILE -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm train-schedule\""
+                            sh "sshpass -v ssh -i $KEYFILE -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker service rm train-schedule\""
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
