@@ -40,8 +40,8 @@ pipeline {
             when {
                 branch 'master'
             }
-            steps {
-                input 'Deploy to Prod?'
+//            steps {
+//                input 'Deploy to Prod?'
                 milestone(1)
                 withCredentials([sshUserPrivateKey(credentialsId: 'swarm_login', keyFileVariable: 'KEYFILE', passphraseVariable: '', usernameVariable: 'USERNAME')]) {
                     script {
