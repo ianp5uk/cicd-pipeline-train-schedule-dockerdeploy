@@ -5,6 +5,7 @@ This is a simple train schedule app written using nodejs. It is intended to be u
 ## Dependencies
 
 The app has been built & proven to run with openjdk 11.0.6 & Gradle 6.2 on Ubuntu 19.10
+(Also ran on Gradle 6.3 and Ubuntu 18.04 LTS on AWS)
 The app itself uses node 9.11.1 & npm 5.6.0
 
 ## Build & run app standalone
@@ -18,4 +19,6 @@ The '-ce' is important, as is installing with apt. Using the older Ubuntu snap v
 unexpected errors in Jenkins.
 To run with Jenkins it will require credentials setting up to access the webserver, dockerhub & github.
 The webserver address is set as a Jenkins parameter.
+
+
 
