@@ -59,7 +59,7 @@ pipeline {
 		stage('Smoke Test') {
 			steps {
 				script {
-						sh "sleep 10"
+						sh "sleep 30"
 						sh "curl -s -o /dev/null -D - $prod_ip:80"
 					}
 				}
