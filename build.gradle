@@ -15,8 +15,8 @@ task build
 
 //declare a task to create a zip of the app
 task zip(type: Zip) {
-	destinationDirectory(file("dist"))
-	archiveBaseName = "trainSchedule"
+	destinationDirectory = file("dist")
+	baseName = "trainSchedule"
 	from ('.') {
 		include "*"
 		include "bin/**"
